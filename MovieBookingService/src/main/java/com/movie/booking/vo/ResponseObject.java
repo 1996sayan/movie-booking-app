@@ -14,6 +14,6 @@ public class ResponseObject<T> {
 
 	private Error error;
 
-	private String errorMessage;
+	private String userMessage;
 
 }
