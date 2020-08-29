@@ -15,6 +15,10 @@ public class GenericException extends Exception {
 		super(message);
 	}
 
+	public GenericException(Throwable cause) {
+		super(cause);
+	}
+
 	public GenericException(String message, Throwable cause) {
 		super(message, cause);
 	}
