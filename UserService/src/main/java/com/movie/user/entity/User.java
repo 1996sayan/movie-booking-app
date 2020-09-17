@@ -3,7 +3,6 @@ package com.movie.user.entity;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -19,17 +18,15 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class User {
 	@Id
-	@Column(name = "user_name")
-	private String userName;
+	private String username;
 	private String name;
 	private String email;
 	private String password;
 	private Set<Role> roles = new HashSet<>();
 
-	public User(String userName, String name, String email, String password) {
-		super();
-		this.userName = userName;
+	public User(String name, String username, String email, String password) {
 		this.name = name;
+		this.username = username;
 		this.email = email;
 		this.password = password;
 	}

@@ -1,7 +1,8 @@
 package com.movie.user.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
+
+import org.springframework.data.annotation.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,5 +19,6 @@ import lombok.ToString;
 public class Role {
 	@Id
 	private long id;
+
 	private RoleName roleName;
 }

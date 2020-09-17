@@ -8,8 +8,15 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * Generic method to use all over this service
+ * 
+ * @author M1050887
+ *
+ * @param <T>
+ */
 @Component
-public class BeanUtil {
+public class BeanUtil<T> {
 
 	@Autowired
 	private static ModelMapper modelMapper;
@@ -25,13 +32,12 @@ public class BeanUtil {
 	 */
 	public static <T, U> List<?> copyListOfProperties(List<T> list, U u) {
 		Type listType = new TypeToken<List<U>>() {
-
 		}.getType();
-		return modelMapper.map(listType, listType);
+		return modelMapper.map(list, listType);
 	}
 
 	/**
-	 * Works as a Vo mapper
+	 * converts Booking to BookingResponse
 	 * 
 	 * @param <T>
 	 * @param <U>
@@ -45,14 +51,14 @@ public class BeanUtil {
 	}
 
 	/**
-	 * Works as a Vo mapper but here Ambiguity is ignored
+	 * converts Booking to BookingResponse, Ambiguity is ignored.
 	 * 
 	 * @param <T>
 	 * @param element
 	 * @param object
 	 * @return
 	 */
-	public static <T> Object copyProp(T element, Object object) {
+	public static <T> Object copyPropWithAmbuiguityIgnore(T element, Object object) {
 		modelMapper.getConfiguration().setAmbiguityIgnored(true);
 		modelMapper.map(element, object);
 		return object;
