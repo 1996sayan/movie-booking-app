@@ -12,15 +12,13 @@ import lombok.Setter;
 public class JwtResponseVo {
 	private String token;
 	private String type = "Bearer";
-	private String userName;
+	private String username;
 	@Setter(value = AccessLevel.NONE)
 	private Collection<? extends GrantedAuthority> authorities;
 
-	public JwtResponseVo(String token, String userName, Collection<? extends GrantedAuthority> authorities) {
-		super();
-		this.token = token;
-		this.userName = userName;
+	public JwtResponseVo(String accessToken, String username, Collection<? extends GrantedAuthority> authorities) {
+		this.token = accessToken;
+		this.username = username;
 		this.authorities = authorities;
 	}
-
 }
