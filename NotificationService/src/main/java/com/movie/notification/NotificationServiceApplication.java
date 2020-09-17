@@ -10,8 +10,8 @@ import com.twilio.Twilio;
 @SpringBootApplication
 public class NotificationServiceApplication {
 
-	private final static String ACCOUNT_SID = "AC946f0ebbede14a0002ef3b9e44bd23f8";
-	private final static String AUTH_ID = "d707cab40a37b6f9c3f710138a121523";
+	private final static String ACCOUNT_SID = "";
+	private final static String AUTH_ID = "";
 
 	static {
 		Twilio.init(ACCOUNT_SID, AUTH_ID);
