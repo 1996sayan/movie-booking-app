@@ -8,9 +8,9 @@ public class MovieBookingExceptionConstant {
 	public static final String ENTITY_NOT_FOUND = "Entity does not exist";
 
 	/**
-	 * OBJECT_EXISTS
+	 * SEAT_EXISTS
 	 */
-	public static final String OBJECT_EXISTS = "Object Exists";
+	public static final String SEAT_EXISTS = "Seat number already exists";
 
 	/**
 	 * DATABASE_LINK_FAILURE

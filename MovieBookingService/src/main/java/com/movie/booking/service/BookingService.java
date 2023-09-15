@@ -17,8 +17,7 @@ import com.movie.booking.vo.UserDetailsResponseVo;
 @Service
 public interface BookingService {
 
-	ResponseObject<BookingResponseVo> performMovieBooking(BookingRequestVo request,
-			ResponseObject<ShowResponseVo> showResponse, ResponseObject<UserDetailsResponseVo> userResponse)
+	ResponseObject<BookingResponseVo> performMovieBooking(String bearerToken,BookingRequestVo request)
 			throws ShowNotFoundException, RecordNotFoundException, RecordAlreadyExistsException;
 
 	ResponseObject<List<BookingResponseVo>> getAllBookings() throws RecordNotFoundException, DatabaseException;

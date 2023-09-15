@@ -21,6 +21,15 @@ public class BeanUtil<T> {
 	@Autowired
 	private static ModelMapper modelMapper;
 
+	static {
+		modelMapper = new ModelMapper();
+	}
+
+	public static ModelMapper getModelMapper() {
+		modelMapper.getConfiguration().setAmbiguityIgnored(true);
+		return modelMapper;
+	}
+
 	/**
 	 * converts List of Booking to List of BookingResponse
 	 * 

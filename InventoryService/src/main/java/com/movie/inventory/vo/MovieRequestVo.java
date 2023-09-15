@@ -5,11 +5,11 @@ import java.util.List;
 
 public class MovieRequestVo {
 
-	private long movieId;
+//	private long movieId;
 
 	private String movie_name;
 
-	private List<String> genres;
+	private String genre;
 
 	private List<String> languages;
 
@@ -47,13 +47,13 @@ public class MovieRequestVo {
 
 	private double duration;
 
-	public long getMovieId() {
-		return movieId;
-	}
-
-	public void setMovieId(long movieId) {
-		this.movieId = movieId;
-	}
+//	public long getMovieId() {
+//		return movieId;
+//	}
+//
+//	public void setMovieId(long movieId) {
+//		this.movieId = movieId;
+//	}
 
 	public String getMovie_name() {
 		return movie_name;
@@ -61,14 +61,6 @@ public class MovieRequestVo {
 
 	public void setMovie_name(String movie_name) {
 		this.movie_name = movie_name;
-	}
-
-	public List<String> getGenres() {
-		return genres;
-	}
-
-	public void setGenres(List<String> genres) {
-		this.genres = genres;
 	}
 
 	public List<String> getLanguages() {
@@ -213,6 +205,14 @@ public class MovieRequestVo {
 
 	public void setDuration(double duration) {
 		this.duration = duration;
+	}
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
 	}
 
 }

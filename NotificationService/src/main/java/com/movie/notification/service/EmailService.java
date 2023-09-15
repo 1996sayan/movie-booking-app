@@ -2,6 +2,9 @@ package com.movie.notification.service;
 
 import org.springframework.stereotype.Service;
 
+import com.movie.notification.vo.Details;
+import com.movie.notification.vo.ResponseObject;
+
 @Service
 public interface EmailService {
 
@@ -11,6 +14,6 @@ public interface EmailService {
 	 * @param subject
 	 * @param text
 	 */
-	void sendSimpleMessage(String to, String subject, String text);
+	ResponseObject<Details> sendSimpleMessage(String to, String subject, String text);
 
 }

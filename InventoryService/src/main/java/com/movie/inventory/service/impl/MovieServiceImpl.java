@@ -26,7 +26,7 @@ public class MovieServiceImpl implements MovieService {
 		Movie movie = new Movie();
 		movie.setMovieId(System.currentTimeMillis());
 		movie.setMovie_name(request.getMovie_name());
-		movie.setGenres(request.getGenres());
+		movie.setGenre(request.getGenre());
 		movie.setLanguages(request.getLanguages());
 
 		Cast cast = new Cast();
@@ -62,8 +62,13 @@ public class MovieServiceImpl implements MovieService {
 
 		movie = movieRepo.save(movie);
 
+		MovieResponseVo movieBookingResponse = new MovieResponseVo();
+		movieBookingResponse.setMovie_name(movie.getMovie_name());
+		movieBookingResponse.setUserName(request.getUserName());
+
 		ResponseObject<MovieResponseVo> movieResponse = new ResponseObject<>();
 		movieResponse.setStatusCode(200);
+		movieResponse.setData(movieBookingResponse);
 		movieResponse.setUserMessage("success");
 
 		return movieResponse;

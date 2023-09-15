@@ -4,10 +4,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+//
+//import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.core.authority.SimpleGrantedAuthority;
+//import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.movie.user.entity.User;
@@ -26,22 +26,23 @@ public class UserPrinciple implements UserDetails {
 	@JsonIgnore
 	private String password;
 
-	private Collection<? extends GrantedAuthority> authorities;
+	//private Collection<? extends GrantedAuthority> authorities;
 
-	public UserPrinciple(String name, String username, String email, String password,
-			Collection<? extends GrantedAuthority> authorities) {
-		this.name = name;
-		this.username = username;
-		this.email = email;
-		this.password = password;
-		this.authorities = authorities;
-	}
+//	public UserPrinciple(String name, String username, String email, String password,
+//			Collection<? extends GrantedAuthority> authorities) {
+//		this.name = name;
+//		this.username = username;
+//		this.email = email;
+//		this.password = password;
+//		this.authorities = authorities;
+//	}
 
 	public static UserPrinciple build(User user) {
-		List<GrantedAuthority> authorities = user.getRoles().stream()
-				.map(role -> new SimpleGrantedAuthority(role.getRoleName().name())).collect(Collectors.toList());
+//		List<GrantedAuthority> authorities = user.getRoles().stream()
+//				.map(role -> new SimpleGrantedAuthority(role.getRoleName().name())).collect(Collectors.toList());
 
-		return new UserPrinciple(user.getName(), user.getUsername(), user.getEmail(), user.getPassword(), authorities);
+	//	return new UserPrinciple(user.getName(), user.getUsername(), user.getEmail(), user.getPassword(), authorities);
+		return null;
 	}
 
 	public Long getId() {

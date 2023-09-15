@@ -1,5 +1,6 @@
 package com.movie.inventory.Converter;
 
+import java.util.HashMap;
 import java.util.stream.Stream;
 
 import javax.persistence.AttributeConverter;
@@ -27,4 +28,11 @@ public class BagEnumConverter implements AttributeConverter<Bags_Allowed, String
 				.orElseThrow(IllegalArgumentException::new);
 	}
 
+	
+	
+	public void fnb() {
+		HashMap<String, String> mp=new HashMap<>();
+		
+	}
+	
 }
