@@ -17,6 +17,7 @@ import com.movie.booking.exception.RecordAlreadyExistsException;
 import com.movie.booking.exception.RecordNotFoundException;
 import com.movie.booking.exception.ShowNotFoundException;
 import com.movie.booking.model.Booking;
+import com.movie.booking.proxy.UserServiceProxy;
 import com.movie.booking.service.BookingService;
 import com.movie.booking.util.BeanUtil;
 import com.movie.booking.vo.BookingRequestVo;
@@ -24,6 +25,8 @@ import com.movie.booking.vo.BookingResponseVo;
 import com.movie.booking.vo.ResponseObject;
 import com.movie.booking.vo.ShowResponseVo;
 import com.movie.booking.vo.UserDetailsResponseVo;
+
+import antlr.StringUtils;
 
 @Service
 public class BookingServiceImpl implements BookingService {
@@ -33,6 +36,10 @@ public class BookingServiceImpl implements BookingService {
 	 */
 	@Autowired
 	BookingDao bookingRepository;
+	
+	@Autowired
+	private UserServiceProxy userFeignClient;
+	
 
 	/**
 	 * 
@@ -45,9 +52,13 @@ public class BookingServiceImpl implements BookingService {
 	 * @throws RecordAlreadyExistsException
 	 */
 	@Override
-	public ResponseObject<BookingResponseVo> performMovieBooking(BookingRequestVo request,
-			ResponseObject<ShowResponseVo> showResponse, ResponseObject<UserDetailsResponseVo> userResponse)
+	public ResponseObject<BookingResponseVo> performMovieBooking(String bearerToken,BookingRequestVo request)
 			throws ShowNotFoundException, RecordNotFoundException, RecordAlreadyExistsException {
+		
+		
+		// Alert: Need to call other service to validate the show response and the user response
+		
+/*		
 		if (userResponse.getStatusCode() != 200) {
 			throw new RecordNotFoundException(MovieBookingExceptionConstant.USER_NOT_REGISTERED);
 		}
@@ -59,15 +70,25 @@ public class BookingServiceImpl implements BookingService {
 				.anyMatch(seatNumber -> request.getSeatNumber().contains(seatNumber.getSeatNumber()))) {
 			throw new RecordNotFoundException(MovieBookingExceptionConstant.SEAT_NOT_EXIST);
 		}
+		*/
+		
+		
+		ResponseObject<UserDetailsResponseVo> userResponse=userFeignClient.getUserDetails(bearerToken,request.getUsername());
+		
+		if(userResponse==null) {
+			throw new RecordNotFoundException(MovieBookingExceptionConstant.USER_NOT_REGISTERED);
+		}
 
+		
+		
 		if (bookingRepository.isSeatPresent(request.getSeatNumber())) {
 			throw new RecordAlreadyExistsException(MovieBookingExceptionConstant.SEAT_ALREADY_BOOKED);
 		}
-		Booking booking = (Booking) BeanUtil.copyProp(request, Booking.class);
+		Booking booking = (Booking) BeanUtil.getModelMapper().map(request, Booking.class);
 		booking = bookingRepository.saveAndFlush(booking);
 
 		ResponseObject<BookingResponseVo> response = new ResponseObject<BookingResponseVo>();
-		response.setData((BookingResponseVo) BeanUtil.copyProperties(booking, BookingResponseVo.class));
+	//	response.setData((BookingResponseVo) BeanUtil.copyProperties(booking, BookingResponseVo.class));
 		response.setStatusCode(200);
 		response.setUserMessage(MovieBookingExceptionConstant.BOOKING_SUCCESS);
 		return response;
@@ -110,19 +131,20 @@ public class BookingServiceImpl implements BookingService {
 			throws RecordNotFoundException, DatabaseException {
 		Booking booking = new Booking();
 		try {
-			if (!bookingRepository.existsById(bookingId)) {
+
+			booking = bookingRepository.findById(bookingId).get();
+			if (booking == null) {
 				throw new RecordNotFoundException(MovieBookingExceptionConstant.NO_PARTICULAR_ENTRY_PRESENT);
 			}
-			booking = bookingRepository.getOne(bookingId);
 		} catch (DataException | JDBCConnectionException | QueryTimeoutException e) {
 			throw new DatabaseException(e);
 		}
 
 		ResponseObject<BookingResponseVo> response = new ResponseObject<BookingResponseVo>();
-		response.setData((BookingResponseVo) BeanUtil.copyProperties(booking, BookingResponseVo.class));
+		response.setData((BookingResponseVo) BeanUtil.getModelMapper().map(booking, BookingResponseVo.class));
 		response.setStatusCode(200);
 		response.setUserMessage(MovieBookingExceptionConstant.BOOKING_ENTRY_CORRESPONDING_TO_BOOKINGID
-				+ MovieBookingExceptionConstant.SINGLE_SPACE + "=>" + bookingId
+				+ MovieBookingExceptionConstant.SINGLE_SPACE + "=>" + bookingId+" "
 				+ MovieBookingExceptionConstant.HAS_BEEN_RETRIEVED);
 		return response;
 	}

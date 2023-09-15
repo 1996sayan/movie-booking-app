@@ -16,10 +16,8 @@ import javax.persistence.Table;
 import com.movie.inventory.Converter.TheatreEnumConverter;
 import com.movie.inventory.enumValue.Theatre_Type;
 
-import lombok.Data;
 
 @Entity
-@Data
 @Table(name = "theatre")
 public class Theatre {
 	@Id

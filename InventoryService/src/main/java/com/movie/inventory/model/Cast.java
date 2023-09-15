@@ -12,10 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
-import lombok.Data;
-
 @Entity
-@Data
 @Table(name = "cast")
 public class Cast {
 	@Id
@@ -32,4 +29,33 @@ public class Cast {
 	@CollectionTable(name = "actress_details", joinColumns = @JoinColumn(name = "cast_id"))
 	@Column(name = "actress_name")
 	private List<String> actressName;
+
+	public Cast() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public long getCastId() {
+		return castId;
+	}
+
+	public void setCastId(long castId) {
+		this.castId = castId;
+	}
+
+	public List<String> getActorName() {
+		return actorName;
+	}
+
+	public void setActorName(List<String> actorName) {
+		this.actorName = actorName;
+	}
+
+	public List<String> getActressName() {
+		return actressName;
+	}
+
+	public void setActressName(List<String> actressName) {
+		this.actressName = actressName;
+	}
+
 }

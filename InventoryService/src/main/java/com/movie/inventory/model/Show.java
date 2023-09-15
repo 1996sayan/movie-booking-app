@@ -14,11 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import lombok.Data;
-
 @Table(name = "show")
 @Entity
-@Data
 public class Show {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -54,4 +51,104 @@ public class Show {
 
 	@Column(name = "total_available_seats")
 	private Integer totalAvailableSeats;
+
+	public Show() {
+	}
+
+	public long getShowId() {
+		return showId;
+	}
+
+	public void setShowId(long showId) {
+		this.showId = showId;
+	}
+
+	public LocalDate getShowDate() {
+		return showDate;
+	}
+
+	public void setShowDate(LocalDate showDate) {
+		this.showDate = showDate;
+	}
+
+	public LocalTime getShowTime() {
+		return showTime;
+	}
+
+	public void setShowTime(LocalTime showTime) {
+		this.showTime = showTime;
+	}
+
+	public long getScreenId() {
+		return screenId;
+	}
+
+	public void setScreenId(long screenId) {
+		this.screenId = screenId;
+	}
+
+	public double getShowDuration() {
+		return showDuration;
+	}
+
+	public void setShowDuration(double showDuration) {
+		this.showDuration = showDuration;
+	}
+
+	public String getShowLanguage() {
+		return showLanguage;
+	}
+
+	public void setShowLanguage(String showLanguage) {
+		this.showLanguage = showLanguage;
+	}
+
+	public Movie getMovie() {
+		return movie;
+	}
+
+	public void setMovie(Movie movie) {
+		this.movie = movie;
+	}
+
+	public double getTickerPrice() {
+		return tickerPrice;
+	}
+
+	public void setTickerPrice(double tickerPrice) {
+		this.tickerPrice = tickerPrice;
+	}
+
+	public List<Seat> getSeats() {
+		return seats;
+	}
+
+	public void setSeats(List<Seat> seats) {
+		this.seats = seats;
+	}
+
+	public Integer getTotalSeats() {
+		return totalSeats;
+	}
+
+	public void setTotalSeats(Integer totalSeats) {
+		this.totalSeats = totalSeats;
+	}
+
+	public Integer getTotalBookedSeats() {
+		return totalBookedSeats;
+	}
+
+	public void setTotalBookedSeats(Integer totalBookedSeats) {
+		this.totalBookedSeats = totalBookedSeats;
+	}
+
+	public Integer getTotalAvailableSeats() {
+		return totalAvailableSeats;
+	}
+
+	public void setTotalAvailableSeats(Integer totalAvailableSeats) {
+		this.totalAvailableSeats = totalAvailableSeats;
+	}
+
 }

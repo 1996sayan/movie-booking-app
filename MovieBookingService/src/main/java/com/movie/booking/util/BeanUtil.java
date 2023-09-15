@@ -8,12 +8,31 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.movie.booking.vo.BookingResponseVo;
+
 @Component
 public class BeanUtil {
 
-	@Autowired
+	
 	private static ModelMapper modelMapper;
+	
+	static {
+		modelMapper=new ModelMapper();
+	}
 
+	public static ModelMapper getModelMapper() {
+		modelMapper.getConfiguration().setAmbiguityIgnored(true);
+		return modelMapper;
+	}
+	
+	
+	private static<U> Type getType(U u) {
+		Type listType = new TypeToken<List<U>>() {
+
+		}.getType();
+		return listType;
+	}
+	
 	/**
 	 * Works as a list of object Vo mapper
 	 * 
@@ -24,10 +43,8 @@ public class BeanUtil {
 	 * @return
 	 */
 	public static <T, U> List<?> copyListOfProperties(List<T> list, U u) {
-		Type listType = new TypeToken<List<U>>() {
-
-		}.getType();
-		return modelMapper.map(listType, listType);
+		Type listType = getType(u);
+		return modelMapper.map(list, listType);
 	}
 
 	/**
@@ -39,10 +56,10 @@ public class BeanUtil {
 	 * @param object
 	 * @return
 	 */
-	public static <T, U> Object copyProperties(T t, Object object) {
-		modelMapper.map(t, object);
-		return object;
-	}
+//	public static <T, U> U copyProperties(T t,U u) {
+//		
+//		return modelMapper.map(t,Class.forName(u));
+//	}
 
 	/**
 	 * Works as a Vo mapper but here Ambiguity is ignored

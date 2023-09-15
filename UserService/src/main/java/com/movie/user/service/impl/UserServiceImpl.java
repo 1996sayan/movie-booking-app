@@ -1,5 +1,6 @@
 package com.movie.user.service.impl;
 
+import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,17 +9,22 @@ import org.springframework.stereotype.Service;
 import com.movie.user.dao.UserRepository;
 import com.movie.user.entity.User;
 import com.movie.user.service.UserService;
+import com.movie.user.vo.SignUpRequestVo;
+
+
 
 @Service
 public class UserServiceImpl implements UserService {
 
+	File f=new File("a.txt");
+	
 	@Autowired
 	UserRepository userDaoInterface;
 
 	@Override
-	public String adduser() {
-		// User userobj = new User("Sayan", "Mondal", "abc@mindtree.com", "7059664120",
-		// "sayan123", "sayan123", "admin");
+	public String adduser(SignUpRequestVo request) {
+//		 User userobj = new User("Sayan", "Mondal", "abc@mindtree.com", "7059664120",
+//		 "sayan123", "sayan123", "admin");
 
 //		User userObj = new User();
 //		userObj.setFirstName("Sayan");

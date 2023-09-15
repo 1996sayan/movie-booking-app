@@ -19,11 +19,11 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 		httpSecurity.userDetailsService(myUserDetailsService);
 	}
 
-	@SuppressWarnings("deprecation")
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return NoOpPasswordEncoder.getInstance();
-	}
+//	@SuppressWarnings("deprecation")
+//	@Bean
+//	public PasswordEncoder passwordEncoder() {
+//		return NoOpPasswordEncoder.getInstance();
+//	}
 
 //	@Override
 //	protected void configure(HttpSecurity httpSecurity) throws Exception {

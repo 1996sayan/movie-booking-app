@@ -59,7 +59,7 @@ public class ExceptionController {
 	@ExceptionHandler(RecordAlreadyExistsException.class)
 	public ResponseObject<Object> recordAlreadyExistsException(RecordAlreadyExistsException e) {
 		LOGGER.error(e.getMessage());
-		ResponseObject<Object> response = errorService.createErrorResponse(MovieBookingExceptionConstant.OBJECT_EXISTS,
+		ResponseObject<Object> response = errorService.createErrorResponse(MovieBookingExceptionConstant.SEAT_EXISTS,
 				HttpStatus.BAD_REQUEST.value(), MovieBookingExceptionCode.getValue(MovieBookingExceptionCode.MTS304));
 		return response;
 	}
@@ -72,7 +72,7 @@ public class ExceptionController {
 	@ExceptionHandler(DatabaseException.class)
 	public ResponseObject<Object> databaseException(DatabaseException e) {
 		LOGGER.error(e.getMessage());
-		ResponseObject<Object> response = errorService.createErrorResponse(MovieBookingExceptionConstant.OBJECT_EXISTS,
+		ResponseObject<Object> response = errorService.createErrorResponse(MovieBookingExceptionConstant.SEAT_EXISTS,
 				HttpStatus.BAD_REQUEST.value(), MovieBookingExceptionCode.getValue(MovieBookingExceptionCode.MTS304));
 		return response;
 	}

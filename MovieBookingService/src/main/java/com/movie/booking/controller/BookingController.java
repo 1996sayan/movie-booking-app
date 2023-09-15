@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,14 +18,10 @@ import com.movie.booking.exception.DatabaseException;
 import com.movie.booking.exception.RecordAlreadyExistsException;
 import com.movie.booking.exception.RecordNotFoundException;
 import com.movie.booking.exception.ShowNotFoundException;
-import com.movie.booking.proxy.ShowServiceProxy;
-import com.movie.booking.proxy.UserServiceProxy;
 import com.movie.booking.service.BookingService;
 import com.movie.booking.vo.BookingRequestVo;
 import com.movie.booking.vo.BookingResponseVo;
 import com.movie.booking.vo.ResponseObject;
-import com.movie.booking.vo.ShowResponseVo;
-import com.movie.booking.vo.UserDetailsResponseVo;
 
 @RestController
 @RequestMapping(value = MovieBookingConstant.BOOKING, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -38,14 +35,14 @@ public class BookingController {
 	/**
 	 * userServiceProxy
 	 */
-	@Autowired
-	UserServiceProxy userServiceProxy;
+//	@Autowired
+//	UserServiceProxy userServiceProxy;
 
 	/**
 	 * showServiceProxy
 	 */
-	@Autowired
-	ShowServiceProxy showServiceProxy;
+//	@Autowired
+//	ShowServiceProxy showServiceProxy;
 
 	/**
 	 * 
@@ -56,12 +53,11 @@ public class BookingController {
 	 * @throws RecordAlreadyExistsException
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = MovieBookingConstant.MOVIE_BOOK)
-	public ResponseObject<BookingResponseVo> performMovieBooking(@Valid @RequestBody BookingRequestVo request)
+	public ResponseObject<BookingResponseVo> performMovieBooking(@RequestHeader("Authorization") String bearerToken,@RequestBody BookingRequestVo request)
 			throws ShowNotFoundException, RecordNotFoundException, RecordAlreadyExistsException {
-		ResponseObject<ShowResponseVo> showResponse = showServiceProxy.getShowResponse();
-		ResponseObject<UserDetailsResponseVo> userResponse = userServiceProxy.getUserDetails();
-		ResponseObject<BookingResponseVo> response = bookingService.performMovieBooking(request, showResponse,
-				userResponse);
+//		ResponseObject<ShowResponseVo> showResponse = showServiceProxy.getShowResponse();
+//		ResponseObject<UserDetailsResponseVo> userResponse = userServiceProxy.getUserDetails();
+		ResponseObject<BookingResponseVo> response = bookingService.performMovieBooking(bearerToken,request);
 		return response;
 	}
 

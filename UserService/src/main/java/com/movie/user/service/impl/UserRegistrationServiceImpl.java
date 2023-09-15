@@ -7,6 +7,10 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.movie.user.constant.UserServiceConstant;
@@ -27,7 +31,7 @@ import com.movie.user.vo.UserRegistrationResponseVo;
 public class UserRegistrationServiceImpl implements UserRegistrationService {
 
 	@Autowired
-	UserServicePasswordEncoder userServicePasswordEncoder;
+	PasswordEncoder userServicePasswordEncoder;
 
 	@Autowired
 	RoleRepository roleRepository;
@@ -35,10 +39,18 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 	@Autowired
 	UserRepository userRepository;
 
+	@Bean
+	BCryptPasswordEncoder passwordEncoder() 
+	{
+	    return new BCryptPasswordEncoder();
+	}
+
 	@Override
 	public ResponseObject<UserRegistrationResponseVo> addUser(@Valid SignUpRequestVo signUpRequest)
 			throws UserRegistractionException {
 
+		
+		
 		User user = new User(signUpRequest.getName(), signUpRequest.getUsername(), signUpRequest.getEmail(),
 				userServicePasswordEncoder.encode(signUpRequest.getPassword()));
 		Set<String> strRoles = signUpRequest.getRole();

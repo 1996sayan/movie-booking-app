@@ -1,23 +1,40 @@
 package com.movie.booking.vo;
 
-import lombok.Data;
+import java.io.Serializable;
 
-@Data
-public class UserDetailsResponseVo {
+public class UserDetailsResponseVo implements Serializable {
 
-	private long userDetailsId;
+	private static final long serialVersionUID = 1L;
 
-	private String userFname;
+	private String username;
+	private String name;
+	private String email;
 
-	private String userLname;
+	public UserDetailsResponseVo() {
+	}
 
-	private String userName;
+	public String getUsername() {
+		return username;
+	}
 
-	private String userEmail;
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-	private String userPassword;
+	public String getName() {
+		return name;
+	}
 
-	private String userPhoneNo;
+	public void setName(String name) {
+		this.name = name;
+	}
 
-	private String userAddress;
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 }
